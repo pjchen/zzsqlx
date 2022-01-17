@@ -1,0 +1,29 @@
+[package]
+name = "sqlx-bench"
+version = "0.1.0"
+authors = ["Austin Bonander <austin@launchbadge.com>"]
+edition = "2018"
+publish = false
+
+[features]
+runtime-actix-native-tls = [ "sqlx/runtime-actix-native-tls", "sqlx-rt/runtime-actix-native-tls" ]
+runtime-async-std-native-tls = [ "sqlx/runtime-async-std-native-tls", "sqlx-rt/runtime-async-std-native-tls" ]
+runtime-tokio-native-tls = [ "sqlx/runtime-tokio-native-tls", "sqlx-rt/runtime-tokio-native-tls" ]
+
+runtime-actix-rustls = [ "sqlx/runtime-actix-rustls", "sqlx-rt/runtime-actix-rustls" ]
+runtime-async-std-rustls = [ "sqlx/runtime-async-std-rustls", "sqlx-rt/runtime-async-std-rustls" ]
+runtime-tokio-rustls = [ "sqlx/runtime-tokio-rustls", "sqlx-rt/runtime-tokio-rustls" ]
+
+postgres = ["sqlx/postgres"]
+
+[dependencies]
+criterion = "0.3.3"
+dotenv = "0.15.0"
+once_cell = "1.4"
+sqlx = { version = "0.4.0-beta.1", path = "../", default-features = false }
+sqlx-rt = { version = "0.2.0", path = "../sqlx-rt", default-features = false }
+
+[[bench]]
+name = "pg_pool"
+harness = false
+required-features = ["postgres"]
